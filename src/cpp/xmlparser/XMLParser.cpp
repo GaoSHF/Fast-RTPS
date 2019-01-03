@@ -440,6 +440,7 @@ XMLP_ret XMLParser::parseXMLCommonTCPTransportData(tinyxml2::XMLElement* p_root,
     <xs:element name="logical_port_range" type="uint16Type"/>
     <xs:element name="logical_port_increment" type="uint16Type"/>
     <xs:element name="metadata_logical_port" type="uint16Type"/>
+    <xs:element name="avoid_tcp_delay" type="boolType"/>
     <xs:element name="ListeningPorts" type="uint16ListType"/>
     <xs:sequence>
     <xs:element name="port" type="uint16Type"/>
@@ -496,6 +497,15 @@ XMLP_ret XMLParser::parseXMLCommonTCPTransportData(tinyxml2::XMLElement* p_root,
             if (XMLP_ret::XML_OK != getXMLInt(p_aux0, &iPort, 0) || iPort < 0 || iPort > 65535)
                 return XMLP_ret::XML_ERROR;
             pTCPDesc->logical_port_increment = static_cast<uint16_t>(iPort);
+        }
+
+        // avoid_tcp_delay - boolType
+        if (nullptr != (p_aux0 = p_root->FirstChildElement(AVOID_TCP_DELAY)))
+        {
+            bool bAvoidDelay(false);
+            if (XMLP_ret::XML_OK != getXMLBool(p_aux0, &bAvoidDelay, 0))
+                return XMLP_ret::XML_ERROR;
+            pTCPDesc->avoid_tcp_delay = bAvoidDelay;
         }
 
         // ListeningPorts uint16ListType

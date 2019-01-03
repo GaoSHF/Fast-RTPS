@@ -550,6 +550,7 @@
             <xs:element name="logical_port_range" type="uint16Type"/>
             <xs:element name="logical_port_increment" type="uint16Type"/>
             <xs:element name="metadata_logical_port" type="uint16Type"/>
+            <xs:element name="avoid_tcp_delay" type="boolType"/>
             <xs:element name="ListeningPorts" type="uint16ListType"/>
             <xs:sequence>
                 <xs:element name="port" type="uint16Type"/>
